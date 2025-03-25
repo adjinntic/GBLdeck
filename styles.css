@@ -1,0 +1,494 @@
+/* Global Variables */
+:root {
+    --gold-primary: #D4AF37;
+    --gold-secondary: #FFD700;
+    --gold-highlight: #F8F0E3;
+    --black-primary: #000000;
+    --black-secondary: #0A0A0A;
+    --text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+    --placeholder-bg: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(10, 10, 10, 0.3));
+    --placeholder-text-color: rgba(212, 175, 55, 0.6);
+    --subtle-bg-color-1: rgba(212, 175, 55, 0.018);
+    --subtle-bg-color-2: rgba(255, 255, 255, 0.012);
+    --glass-bg: rgba(15, 15, 15, 0.7);
+    --glass-border: rgba(212, 175, 55, 0.2);
+    --glass-highlight: rgba(212, 175, 55, 0.05);
+}
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+body {
+    background-color: var(--black-primary);
+    color: white;
+    overflow-x: hidden;
+}
+
+/* Layout Structure */
+.pitch-deck {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.slide {
+    min-height: 100vh;
+    padding: 50px 40px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.slide-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+}
+
+/* Background Pattern Animation */
+@keyframes subtleShift {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100px 100px; }
+}
+
+.slide::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    width: calc(100% + 100px);
+    height: calc(100% + 100px);
+    z-index: 0;
+    background-image:
+        repeating-linear-gradient(45deg,
+            transparent,
+            transparent 35px,
+            var(--subtle-bg-color-2) 35px,
+            var(--subtle-bg-color-2) 36px
+        ),
+        repeating-linear-gradient(90deg,
+            transparent,
+            transparent 49px,
+            var(--subtle-bg-color-1) 49px,
+            var(--subtle-bg-color-1) 50px
+        ),
+        repeating-linear-gradient(0deg,
+            transparent,
+            transparent 49px,
+            var(--subtle-bg-color-1) 49px,
+            var(--subtle-bg-color-1) 50px
+        );
+    opacity: 0.6;
+    pointer-events: none;
+    animation: subtleShift 30s linear infinite;
+    background-size: 50px 50px, 50px 50px, 50px 50px;
+}
+
+/* Typography Styles */
+h1, h2 {
+    color: var(--gold-primary);
+    margin-bottom: 30px;
+    text-shadow: var(--text-shadow);
+}
+
+h1 {
+    font-size: 56px;
+    line-height: 1.2;
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 40px;
+    line-height: 1.2;
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: var(--gold-secondary);
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    max-width: 750px;
+}
+
+/* Global SVG Background Styles */
+.global-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+/* Path animations */
+@keyframes floatPath {
+    0% { transform: translateY(0); opacity: 0.3; }
+    50% { transform: translateY(-20px); opacity: 0.7; }
+    100% { transform: translateY(0); opacity: 0.3; }
+}
+
+.animated-path {
+    animation: floatPath 30s ease-in-out infinite;
+    opacity: 0.3;
+}
+
+.path-delay-1 {
+    animation-delay: -10s;
+}
+
+.path-delay-2 {
+    animation-delay: -20s;
+}
+
+/* Circle animations */
+@keyframes floatCircle {
+    0% { transform: translate(0, 0); opacity: 0.4; }
+    25% { transform: translate(10px, -10px); opacity: 0.7; }
+    50% { transform: translate(20px, 0); opacity: 0.4; }
+    75% { transform: translate(10px, 10px); opacity: 0.7; }
+    100% { transform: translate(0, 0); opacity: 0.4; }
+}
+
+.floating-circle {
+    animation: floatCircle 20s ease-in-out infinite;
+}
+
+.circle-delay-1 {
+    animation-delay: -5s;
+    animation-duration: 25s;
+}
+
+.circle-delay-2 {
+    animation-delay: -12s;
+    animation-duration: 15s;
+}
+
+/* Glow Elements */
+.glow {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,175,55,0.25) 0%, rgba(212,175,55,0) 70%);
+    z-index: 1;
+    filter: blur(30px);
+    opacity: 0;
+    animation: pulsateGlow 12s infinite alternate;
+}
+
+@keyframes pulsateGlow {
+    0% { opacity: 0.2; transform: scale(0.95); }
+    50% { opacity: 0.5; transform: scale(1.05); }
+    100% { opacity: 0.2; transform: scale(0.95); }
+}
+
+.glow-1 { 
+    top: 15%; 
+    left: 8%; 
+    animation-delay: -3s;
+}
+
+.glow-2 { 
+    bottom: 8%; 
+    right: 12%; 
+    animation-delay: -7s;
+}
+
+/* Component Styles */
+.goldbar-logo {
+    display: inline-block;
+    padding: 5px 20px;
+    border: 2px solid var(--gold-primary);
+    color: var(--gold-primary);
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.goldbar-logo::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transform: skewX(-25deg);
+    animation: shine 5s infinite;
+}
+
+@keyframes shine {
+    0% { left: -100%; }
+    20% { left: 100%; }
+    100% { left: 100%; }
+}
+
+.visual-placeholder {
+    background: var(--placeholder-bg);
+    border-radius: 5px;
+    padding: 20px;
+    margin: 20px 0;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.visual-placeholder::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to bottom right, 
+        transparent, 
+        transparent, 
+        rgba(212, 175, 55, 0.08), 
+        transparent, 
+        transparent
+    );
+    transform: rotate(45deg);
+    animation: shimmer 8s infinite linear;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) rotate(45deg); }
+}
+
+.placeholder-text {
+    color: var(--placeholder-text-color);
+    font-size: 16px;
+    font-style: italic;
+    padding: 10px;
+}
+
+.highlight-box {
+    background: linear-gradient(145deg, var(--glass-bg), rgba(25,25,25,0.5));
+    border-left: 3px solid var(--gold-primary);
+    border-top: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--glass-border);
+    border-right: 1px solid var(--glass-border);
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5), inset 0 1px 1px var(--glass-highlight);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.highlight-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+    opacity: 0.3;
+}
+
+.highlight-box:hover {
+    box-shadow: 0 10px 25px rgba(0,0,0,0.6), inset 0 1px 2px var(--glass-highlight);
+    transform: translateY(-2px);
+}
+
+.two-col {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    margin: 30px 0;
+}
+
+.col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+}
+
+.stat {
+    font-size: 48px;
+    color: var(--gold-primary);
+    margin-bottom: 10px;
+    font-weight: 300;
+    text-shadow: var(--text-shadow);
+}
+
+.slide-indicator {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: rgba(212, 175, 55, 0.5);
+    font-size: 14px;
+    z-index: 3;
+}
+
+.caption {
+    color: rgba(255,255,255,0.6);
+    font-style: italic;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.gold-btn {
+    display: inline-block;
+    background-color: var(--gold-primary);
+    color: var(--black-primary);
+    font-weight: bold;
+    padding: 12px 30px;
+    text-decoration: none;
+    margin-top: 20px;
+    transition: all 0.4s ease;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.gold-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: all 0.4s ease;
+    z-index: -1;
+    transform: skewX(-25deg);
+}
+
+.gold-btn:hover {
+    background-color: var(--gold-secondary);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+}
+
+.gold-btn:hover::before {
+    left: 100%;
+    transition: all 0.7s ease;
+}
+
+.pill {
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    background-color: rgba(212, 175, 55, 0.2);
+    color: var(--gold-primary);
+}
+
+/* List Styles */
+ul {
+    list-style-position: outside;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.highlight-box ul li {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Chart Component Styles */
+.revenue-breakdown-chart .placeholder-text,
+.investment-allocation-chart .placeholder-text,
+.cost-structure-chart .placeholder-text {
+    font-size: 14px;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 40px;
+    }
+    
+    h2 {
+        font-size: 32px;
+    }
+    
+    .two-col {
+        flex-direction: column;
+    }
+    
+    .col {
+        min-width: 100%;
+    }
+    
+    .slide {
+        padding: 30px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 32px;
+    }
+    
+    h2 {
+        font-size: 28px;
+    }
+    
+    .goldbar-logo {
+        font-size: 20px;
+    }
+    
+    .visual-placeholder {
+        min-height: 200px;
+    }
+}
