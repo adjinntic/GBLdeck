@@ -255,25 +255,22 @@ p {
     100% { left: 100%; }
 }
 
+/* Visual placeholder container */
 .visual-placeholder {
-    background: var(--placeholder-bg);
-    border-radius: 5px;
-    padding: 20px;
-    margin: 20px 0;
-    min-height: 300px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    border: 1px solid rgba(212, 175, 55, 0.2);
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-    transition: all 0.3s ease;
-    border: 1px solid rgba(212, 175, 55, 0.25);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-    background-color: rgba(0,0,0,0.1);
-    border-radius: 4px;
+  background: var(--placeholder-bg);
+  border-radius: 5px;
+  padding: 10px; /* Reduced padding to maximize image space */
+  margin: 20px 0;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  overflow: hidden; /* Prevent image overflow */
+  position: relative;
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
 }
 
 .visual-placeholder::after {
@@ -458,134 +455,65 @@ li {
     font-size: 14px;
 }
 
-/* Image styling for slide images */
+/* Image styling - CONSOLIDATED RULES */
 .slide-image {
+  width: 100%;
   max-width: 100%;
   height: auto;
   border-radius: 4px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   display: block;
-  object-fit: cover;
+  object-fit: cover; /* Use cover to ensure no whitespace */
   margin: 0 auto;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Limit image size to 1.5x column width */
+/* Fix two-column layout images */
 .two-col .col .slide-image {
-  max-width: 150%; 
-  margin-left: -25%;
-  width: auto;
+  max-width: 100%; /* Prevent overflow */
+  margin-left: 0; /* Reset margin */
+  width: 100%; /* Full width */
 }
 
-/* Infographic styling */
-.infographic-container {
-  display: flex;
-  height: 300px;
-  align-items: flex-end;
-  justify-content: space-around;
-  margin: 20px 0;
+/* Custom heights for visual placeholders */
+.visual-placeholder[style*="min-height: 450px"] {
+  min-height: 450px;
 }
 
-.chart-element {
-  width: 22%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  border-radius: 4px 4px 0 0;
-  position: relative;
-  transition: all 0.3s ease;
+.visual-placeholder[style*="min-height: 350px"] {
+  min-height: 350px;
 }
 
-.chart-element:hover {
-  transform: translateY(-10px);
+.visual-placeholder[style*="min-height: 250px"] {
+  min-height: 250px;
 }
 
-.chart-label {
-  position: absolute;
-  bottom: -40px;
-  font-size: 14px;
-  font-weight: bold;
-  color: var(--text-color);
-  text-align: center;
-  width: 100%;
+.visual-placeholder[style*="min-height: 200px"] {
+  min-height: 200px;
 }
 
-.chart-value {
-  font-size: 24px;
-  font-weight: bold;
+.visual-placeholder[style*="min-height: 150px"] {
+  min-height: 150px;
 }
 
-/* Pie chart styling */
-.pie-chart-container {
-  position: relative;
-  width: 300px;
-  height: 300px;
-  margin: 0 auto;
-}
+/* Fix the broken media query */
+@media (max-width: 768px) {
+  .visual-placeholder {
+    min-height: 180px !important;
+  }
 
-.pie-segment {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  transform-origin: center;
-}
+  .slide-image {
+    object-fit: contain; /* On mobile, contain to avoid cropping */
+  }
 
-.legend-item {
-  display: flex;
-  align-items: center;
-  margin: 10px 0;
-}
-
-.legend-color {
-  width: 16px;
-  height: 16px;
-  margin-right: 10px;
-  border-radius: 2px;
-}
-
-/* Image and Chart Styling */
-.slide-image {
-  max-width: 100%;
-  max-height: 350px;
-  height: auto;
-  border-radius: 4px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  display: block;
-  object-fit: contain;
-  margin: 0 auto;
-}
-
-/* Ensure images in two-column layout aren't too large */
-.two-col .col .slide-image {
-  max-width: 100%;
-  max-height: 300px;
-}
-
-/* For smaller visual placeholders */
-.visual-placeholder[style*="min-height: 150px"] .slide-image,
-.visual-placeholder[style*="min-height: 100px"] .slide-image {
-  max-height: 150px;
-}
-
-/* For medium visual placeholders */
-.visual-placeholder[style*="min-height: 200px"] .slide-image,
-.visual-placeholder[style*="min-height: 250px"] .slide-image {
-  max-height: 220px;
-}
-        object-fit: contain;
-    }
-
-    .two-col .col .slide-image {
-      max-width: 100%;
-      margin-left: 0;
-    }
-    
-    .chart-element {
-      width: 20%;
-    }
+  .two-col .col .slide-image {
+    max-width: 100%;
+    margin-left: 0;
+  }
+  
+  .chart-element {
+    width: 20%;
+  }
 }
 
 @media (max-width: 480px) {
