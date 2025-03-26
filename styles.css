@@ -533,3 +533,125 @@ li {
         min-height: 200px;
     }
 }
+
+/* Timeline visualization styles */
+.timeline-visual {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  position: relative;
+  margin: 30px 0;
+  width: 100%;
+  height: 100%;
+  min-height: 250px;
+}
+
+.timeline-connector {
+  position: absolute;
+  top: 20px;
+  left: 5%;
+  width: 90%;
+  height: 6px;
+  background: linear-gradient(90deg, var(--gold-primary), var(--gold-secondary));
+  z-index: 1;
+  border-radius: 3px;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+.timeline-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 33%;
+  position: relative;
+  z-index: 2;
+}
+
+.timeline-dot {
+  width: 20px;
+  height: 20px;
+  background-color: var(--gold-primary);
+  border-radius: 50%;
+  margin-bottom: 15px;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.5), 
+              0 0 5px rgba(212, 175, 55, 0.8);
+  position: relative;
+}
+
+.timeline-dot::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border-radius: 50%;
+  top: 5px;
+  left: 5px;
+}
+
+.timeline-card {
+  background: linear-gradient(145deg, rgba(15, 15, 15, 0.7), rgba(25, 25, 25, 0.5));
+  border-top: 1px solid var(--glass-border);
+  border-left: 1px solid var(--glass-border);
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  border-radius: 8px;
+  width: 90%;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(212, 175, 55, 0.2);
+}
+
+.timeline-quarter {
+  color: var(--gold-primary);
+  margin: 0 0 5px 0;
+  font-size: 22px;
+  text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+}
+
+.timeline-phase-name {
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: white;
+  font-size: 18px;
+}
+
+.timeline-items {
+  margin: 0;
+  padding-left: 20px;
+  list-style-type: disc;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 14px;
+}
+
+.timeline-items li {
+  margin-bottom: 5px;
+}
+
+/* Media queries for timeline responsiveness */
+@media (max-width: 768px) {
+  .timeline-visual {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .timeline-connector {
+    display: none;
+  }
+  
+  .timeline-node {
+    width: 90%;
+    margin-bottom: 30px;
+  }
+  
+  .timeline-card {
+    width: 100%;
+  }
+}
