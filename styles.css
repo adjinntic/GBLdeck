@@ -272,6 +272,8 @@ p {
     transition: all 0.3s ease;
     border: 1px solid rgba(212, 175, 55, 0.25);
     box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 4px;
 }
 
 .visual-placeholder::after {
@@ -296,6 +298,10 @@ p {
 @keyframes shimmer {
     0% { transform: translateX(-100%) rotate(45deg); }
     100% { transform: translateX(100%) rotate(45deg); }
+}
+
+.visual-placeholder img + .placeholder-text {
+  display: none;
 }
 
 .placeholder-text {
@@ -452,26 +458,133 @@ li {
     font-size: 14px;
 }
 
-/* Responsive Media Queries */
-@media (max-width: 768px) {
-    h1 {
-        font-size: 40px;
+/* Image styling for slide images */
+.slide-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  display: block;
+  object-fit: cover;
+  margin: 0 auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Limit image size to 1.5x column width */
+.two-col .col .slide-image {
+  max-width: 150%; 
+  margin-left: -25%;
+  width: auto;
+}
+
+/* Infographic styling */
+.infographic-container {
+  display: flex;
+  height: 300px;
+  align-items: flex-end;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+
+.chart-element {
+  width: 22%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border-radius: 4px 4px 0 0;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.chart-element:hover {
+  transform: translateY(-10px);
+}
+
+.chart-label {
+  position: absolute;
+  bottom: -40px;
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--text-color);
+  text-align: center;
+  width: 100%;
+}
+
+.chart-value {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Pie chart styling */
+.pie-chart-container {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+}
+
+.pie-segment {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transform-origin: center;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
+  border-radius: 2px;
+}
+
+/* Image and Chart Styling */
+.slide-image {
+  max-width: 100%;
+  max-height: 350px;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  display: block;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+/* Ensure images in two-column layout aren't too large */
+.two-col .col .slide-image {
+  max-width: 100%;
+  max-height: 300px;
+}
+
+/* For smaller visual placeholders */
+.visual-placeholder[style*="min-height: 150px"] .slide-image,
+.visual-placeholder[style*="min-height: 100px"] .slide-image {
+  max-height: 150px;
+}
+
+/* For medium visual placeholders */
+.visual-placeholder[style*="min-height: 200px"] .slide-image,
+.visual-placeholder[style*="min-height: 250px"] .slide-image {
+  max-height: 220px;
+}
+        object-fit: contain;
+    }
+
+    .two-col .col .slide-image {
+      max-width: 100%;
+      margin-left: 0;
     }
     
-    h2 {
-        font-size: 32px;
-    }
-    
-    .two-col {
-        flex-direction: column;
-    }
-    
-    .col {
-        min-width: 100%;
-    }
-    
-    .slide {
-        padding: 30px 20px;
+    .chart-element {
+      width: 20%;
     }
 }
 
