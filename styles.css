@@ -655,3 +655,108 @@ li {
     width: 100%;
   }
 }
+
+/* Investment visualization styles */
+.investment-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.investment-arrow {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
+  width: 80%;
+  height: 180px;
+  margin-bottom: 40px;
+}
+
+.arrow-segment {
+  position: relative;
+  margin: 0 5px;
+  background: linear-gradient(to top, var(--gold-primary), rgba(212, 175, 55, 0.7));
+  border-radius: 4px 4px 0 0;
+  display: flex;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.arrow-segment:hover {
+  transform: translateY(-10px);
+}
+
+.arrow-segment-1 {
+  height: 80px;
+  width: 80px;
+}
+
+.arrow-segment-2 {
+  height: 120px;
+  width: 80px;
+}
+
+.arrow-segment-3 {
+  height: 170px;
+  width: 80px;
+}
+
+.arrow-label {
+  position: absolute;
+  bottom: -30px;
+  font-weight: bold;
+  color: var(--gold-primary);
+}
+
+.arrow-point {
+  position: absolute;
+  top: -40px;
+  right: 50px;
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 40px solid var(--gold-primary);
+  transform: rotate(45deg);
+  filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
+}
+
+.market-highlights {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.market-stat {
+  text-align: center;
+  padding: 15px;
+  background: linear-gradient(145deg, rgba(15, 15, 15, 0.7), rgba(25, 25, 25, 0.5));
+  border-top: 1px solid var(--glass-border);
+  border-left: 1px solid var(--glass-border);
+  border-radius: 8px;
+  min-width: 120px;
+  transition: transform 0.3s ease;
+}
+
+.market-stat:hover {
+  transform: translateY(-5px);
+}
+
+.market-stat .stat {
+  color: var(--gold-primary);
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+.market-stat .stat-label {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+}
