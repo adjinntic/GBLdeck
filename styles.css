@@ -660,11 +660,9 @@ li {
 .investment-visual {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   width: 100%;
-  height: 100%;
-  position: relative;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 .investment-arrow {
@@ -726,37 +724,58 @@ li {
   filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
 }
 
+/* Fixed responsive styling for market highlights */
 .market-highlights {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   width: 100%;
+  gap: 15px;
+  padding: 10px;
   margin-top: 20px;
+  box-sizing: border-box;
 }
 
 .market-stat {
+  flex: 1 1 auto;
+  min-width: 28%;
+  max-width: 30%;
   text-align: center;
-  padding: 15px;
+  padding: 15px 10px;
   background: linear-gradient(145deg, rgba(15, 15, 15, 0.7), rgba(25, 25, 25, 0.5));
   border-top: 1px solid var(--glass-border);
   border-left: 1px solid var(--glass-border);
   border-radius: 8px;
-  min-width: 120px;
   transition: transform 0.3s ease;
+  box-sizing: border-box;
 }
 
-.market-stat:hover {
-  transform: translateY(-5px);
-}
-
+/* Make text responsive */
 .market-stat .stat {
   color: var(--gold-primary);
-  font-size: 24px;
+  font-size: clamp(18px, 4vw, 24px);
   font-weight: bold;
   margin-bottom: 5px;
   text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
 
 .market-stat .stat-label {
-  font-size: 14px;
+  font-size: clamp(12px, 2vw, 14px);
   color: rgba(255, 255, 255, 0.8);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .market-stat {
+    min-width: 45%;
+    max-width: 48%;
+  }
+}
+
+@media (max-width: 480px) {
+  .market-stat {
+    min-width: 90%;
+    max-width: 100%;
+    margin-bottom: 10px;
+  }
 }
