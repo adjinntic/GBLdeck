@@ -371,6 +371,7 @@ p {
     color: rgba(212, 175, 55, 0.5);
     font-size: 14px;
     z-index: 3;
+    display: none;
 }
 
 .caption {
